@@ -35,8 +35,11 @@ jobs:
             winget install --id Microsoft.EdgeWebView2Runtime --silent --accept-package-agreements --accept-source-agreements
           }
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install frontend dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile || npm ci
 
       - name: Build Tauri app
         uses: tauri-apps/tauri-action@v0
