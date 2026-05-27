@@ -7,6 +7,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Windows (NSIS)
@@ -74,14 +77,6 @@ jobs:
         with:
           name: RouterAdmin-MSI-x64
           path: dist/
-
-      - name: Delete existing "latest" release
-        uses: dev-drprasad/delete-tag-and-release@v1.1
-        with:
-          tag_name: latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
 
       - name: Create Public Release
         uses: softprops/action-gh-release@v2
