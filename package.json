@@ -2,6 +2,8 @@
   "name": "router-admin",
   "version": "0.1.0",
   "private": true,
+  "author": "Axel Mrak",
+  "description": "Router management desktop application — manage devices, access control, guest WiFi, and bandwidth on your OEM router",
   "type": "module",
   "scripts": {
     "dev": "vite",

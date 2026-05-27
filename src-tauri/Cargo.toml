@@ -2,7 +2,7 @@
 name = "router-admin"
 version = "0.1.0"
 description = "Router management desktop application"
-authors = ["you"]
+authors = ["Axel Mrak"]
 edition = "2021"
 
 [build-dependencies]
