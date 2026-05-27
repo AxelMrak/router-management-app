@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: RouterAdmin-Setup-x64
-          path: src-tauri/target/release/bundle/nsis/*_setup.exe
+          path: src-tauri/target/release/bundle/nsis/*-setup.exe
           if-no-files-found: error
 
       - name: Upload MSI installer
