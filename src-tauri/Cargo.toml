@@ -5,10 +5,6 @@ description = "Router management desktop application"
 authors = ["you"]
 edition = "2021"
 
-[lib]
-name = "router_admin_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
-
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
