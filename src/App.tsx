@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth.store";
+import { Toaster } from "@/components/ui/sonner";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import DevicesPage from "@/pages/DevicesPage";
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
+      <Toaster richColors />
     </HashRouter>
   );
 }

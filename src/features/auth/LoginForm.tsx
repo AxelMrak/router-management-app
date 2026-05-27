@@ -20,6 +20,7 @@ type FormValues = z.infer<typeof schema>;
 export function LoginForm() {
   const { setToken } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -29,12 +30,15 @@ export function LoginForm() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
+    setErrorMessage(null);
     try {
       const token = await login(values.username, values.password);
       setToken(token);
       toast.success("Conectado al router");
-    } catch {
-      toast.error("Error de inicio de sesión — verifique credenciales o IP del router");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error de conexión";
+      setErrorMessage(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
@@ -85,6 +89,12 @@ export function LoginForm() {
                 <p className="text-xs text-destructive">{errors.password.message}</p>
               )}
             </div>
+
+            {errorMessage && (
+              <div className="bg-destructive/10 border border-destructive/30 rounded-lg px-3 py-2">
+                <p className="text-xs text-destructive font-medium">{errorMessage}</p>
+              </div>
+            )}
 
             <Button
               type="submit"

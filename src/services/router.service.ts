@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
 import type { JsonRpcRequest, JsonRpcResponse, ApiResult } from "@/types/router";
 
-const ROUTER_URL = import.meta.env.VITE_ROUTER_URL ?? "http://192.168.1.1";
+const ROUTER_URL = import.meta.env.VITE_ROUTER_URL ?? "http://192.168.0.1";
 
 let _rpcId = 1;
 
