@@ -29,7 +29,6 @@
       "iconPath": "icons/tray-icon.png"
     }
   },
-  "//_note": "Windows auto-start requires tauri-plugin-autostart crate — add Cargo.toml dependency and plugin registration when implementing.",
   "bundle": {
     "active": true,
     "targets": ["msi", "nsis"],
