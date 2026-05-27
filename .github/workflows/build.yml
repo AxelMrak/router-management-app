@@ -25,16 +25,6 @@ jobs:
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install WebView2 (pre-installed on runners, but ensure)
-        run: |
-          Write-Host "WebView2 runtime check"
-          if (Test-Path "C:\Program Files (x86)\Microsoft\EdgeWebView") {
-            Write-Host "WebView2 found"
-          } else {
-            Write-Host "WebView2 not found - installing"
-            winget install --id Microsoft.EdgeWebView2Runtime --silent --accept-package-agreements --accept-source-agreements
-          }
-
       - name: Install pnpm
         run: npm install -g pnpm
 
@@ -67,10 +57,10 @@ jobs:
           if-no-files-found: warn
 
   create-release:
-    name: Create GitHub Release
+    name: Create Public Release
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
       - name: Download NSIS installer
@@ -85,9 +75,33 @@ jobs:
           name: RouterAdmin-MSI-x64
           path: dist/
 
-      - name: Create Release
+      - name: Delete existing "latest" release
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        with:
+          tag_name: latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Create Public Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: latest
+          name: "RouterAdmin — Latest Build"
+          body: |
+            Latest build from `main` branch.
+
+            **Built:** ${{ github.event.head_commit.timestamp }}
+            **Commit:** ${{ github.sha }}
+
+            ## Downloads
+            - **RouterAdmin_0.1.0_x64-setup.exe** — NSIS installer (recommended)
+            - **RouterAdmin_0.1.0_x64_en-US.msi** — MSI installer
+
+            ## Installation
+            1. Download the `.exe` or `.msi` file
+            2. Double-click to install
+            3. Launch "RouterAdmin" from the Start menu
+          draft: false
+          prerelease: false
           files: dist/*
-          draft: true
-          generate_release_notes: true
