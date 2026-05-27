@@ -10,6 +10,14 @@ const VARIANTS: Record<StatusBadgeVariant, string> = {
   inactive: "bg-muted/60 text-muted-foreground border-border",
 };
 
+const LABELS: Record<StatusBadgeVariant, string> = {
+  online: "En línea",
+  offline: "Desconectado",
+  blocked: "Bloqueado",
+  active: "Activo",
+  inactive: "Inactivo",
+};
+
 const DOTS: Record<StatusBadgeVariant, string> = {
   online: "bg-[oklch(0.63_0.18_150)]",
   offline: "bg-muted-foreground",
@@ -25,7 +33,7 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ variant, label, className }: StatusBadgeProps) {
-  const text = label ?? variant.charAt(0).toUpperCase() + variant.slice(1);
+  const text = label ?? LABELS[variant];
   return (
     <span
       className={cn(

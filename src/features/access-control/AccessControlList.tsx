@@ -98,7 +98,7 @@ function RuleCard({
           size="icon"
           className="w-7 h-7 text-muted-foreground hover:text-foreground hover:bg-accent"
           onClick={onEdit}
-          aria-label="Edit rule"
+          aria-label="Editar regla"
         >
           <Pencil className="w-3.5 h-3.5" />
         </Button>
@@ -107,7 +107,7 @@ function RuleCard({
           size="icon"
           className="w-7 h-7 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
           onClick={onDelete}
-          aria-label="Delete rule"
+          aria-label="Eliminar regla"
         >
           <Trash2 className="w-3.5 h-3.5" />
         </Button>
@@ -152,7 +152,7 @@ export function AccessControlList() {
     return (
       <div className="flex flex-col items-center justify-center h-48 gap-3">
         <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">Loading rules…</p>
+        <p className="text-sm text-muted-foreground">Cargando reglas…</p>
       </div>
     );
   }
@@ -161,10 +161,10 @@ export function AccessControlList() {
     return (
       <>
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-muted-foreground">0 rules configured</p>
+          <p className="text-sm text-muted-foreground">0 reglas configuradas</p>
           <Button size="sm" onClick={openCreate} className="gap-2 h-9">
             <Plus className="w-3.5 h-3.5" />
-            New Rule
+            Nueva Regla
           </Button>
         </div>
         <div className="bg-card border border-border rounded-xl flex flex-col items-center justify-center py-14 gap-3">
@@ -172,11 +172,11 @@ export function AccessControlList() {
             <ShieldOff className="w-5 h-5 text-muted-foreground" />
           </div>
           <p className="text-sm text-muted-foreground">
-            Could not load rules from router — create one locally.
+            No se pudieron cargar las reglas desde el router — crea una localmente.
           </p>
           <Button size="sm" variant="outline" onClick={openCreate} className="border-border gap-2 mt-1">
             <Plus className="w-3.5 h-3.5" />
-            Create your first rule
+            Crea tu primera regla
           </Button>
         </div>
         {showModal && (
@@ -196,11 +196,11 @@ export function AccessControlList() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-muted-foreground">
-          {rules.length} rule{rules.length !== 1 ? "s" : ""} configured
+          {rules.length} {rules.length === 1 ? "regla configurada" : "reglas configuradas"}
         </p>
         <Button size="sm" onClick={openCreate} className="gap-2 h-9">
           <Plus className="w-3.5 h-3.5" />
-          New Rule
+          Nueva Regla
         </Button>
       </div>
 
@@ -211,10 +211,10 @@ export function AccessControlList() {
             <div className="w-12 h-12 rounded-xl bg-muted/40 border border-border flex items-center justify-center">
               <ShieldOff className="w-5 h-5 text-muted-foreground" />
             </div>
-            <p className="text-sm text-muted-foreground">No rules configured</p>
+            <p className="text-sm text-muted-foreground">No hay reglas configuradas</p>
             <Button size="sm" variant="outline" onClick={openCreate} className="border-border gap-2 mt-1">
               <Plus className="w-3.5 h-3.5" />
-              Create your first rule
+              Crea tu primera regla
             </Button>
           </div>
         ) : (

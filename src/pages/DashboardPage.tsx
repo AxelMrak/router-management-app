@@ -43,33 +43,33 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout
-      title="Dashboard"
-      description="Network overview at a glance"
+      title="Panel"
+      description="Resumen de la red en tiempo real"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard
           icon={<Monitor className="w-5 h-5 text-primary" />}
-          label="Total Devices"
+          label="Total Dispositivos"
           value={devices.length}
-          sub={`${onlineCount} online`}
+          sub={`${onlineCount} en línea`}
         />
         <StatCard
           icon={<Wifi className="w-5 h-5 text-primary" />}
-          label="Online"
+          label="En línea"
           value={onlineCount}
-          sub={devices.length > 0 ? `${Math.round((onlineCount / devices.length) * 100)}% of total` : "—"}
+          sub={devices.length > 0 ? `${Math.round((onlineCount / devices.length) * 100)}% del total` : "—"}
         />
         <StatCard
           icon={<AlertTriangle className="w-5 h-5 text-destructive" />}
-          label="Blocked"
+          label="Bloqueados"
           value={blockedCount}
-          sub={blockedCount === 1 ? "1 device restricted" : `${blockedCount} devices restricted`}
+          sub={blockedCount === 1 ? "1 dispositivo restringido" : `${blockedCount} dispositivos restringidos`}
         />
         <StatCard
           icon={<Shield className="w-5 h-5 text-primary" />}
-          label="Access Rules"
+          label="Reglas de Acceso"
           value={rules.length}
-          sub={`${rules.filter((r) => r.enabled).length} active`}
+          sub={`${rules.filter((r) => r.enabled).length} activas`}
         />
       </div>
     </DashboardLayout>

@@ -52,13 +52,13 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
     try {
       const result = await setDeviceSchedule(token, device.mac, crypto.randomUUID());
       if (result.success) {
-        toast.success(`Schedule applied to ${device.hostname}`);
+        toast.success(`Horario aplicado a ${device.hostname}`);
         onClose();
       } else {
         toast.error(result.error.message);
       }
     } catch {
-      toast.error("Failed to apply schedule");
+      toast.error("Error al aplicar horario");
     } finally {
       setSaving(false);
     }
@@ -68,7 +68,7 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
     <Dialog open onOpenChange={onClose}>
       <DialogContent className="bg-card border-border max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-foreground">Schedule Access</DialogTitle>
+          <DialogTitle className="text-foreground">Programar Acceso</DialogTitle>
           <p className="text-sm text-muted-foreground">{device.hostname}</p>
         </DialogHeader>
 
@@ -76,7 +76,7 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
           {/* Days */}
           <div className="flex flex-col gap-2">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Active Days
+              Días Activos
             </p>
             <DaySelector value={days} onChange={setDays} />
           </div>
@@ -84,11 +84,11 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
           {/* Time range */}
           <div className="flex flex-col gap-2">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Time Range
+              Horario
             </p>
             <div className="flex items-center gap-3">
               <div className="flex flex-col gap-1 flex-1">
-                <label className="text-xs text-muted-foreground">From</label>
+                  <label className="text-xs text-muted-foreground">Desde</label>
                 <Input
                   type="time"
                   value={start}
@@ -98,7 +98,7 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
               </div>
               <div className="mt-5 text-muted-foreground text-sm">—</div>
               <div className="flex flex-col gap-1 flex-1">
-                <label className="text-xs text-muted-foreground">To</label>
+                  <label className="text-xs text-muted-foreground">Hasta</label>
                 <Input
                   type="time"
                   value={end}
@@ -112,11 +112,11 @@ function ScheduleModal({ device, onClose }: ScheduleModalProps) {
 
         <DialogFooter className="gap-2">
           <Button variant="outline" onClick={onClose} className="border-border">
-            Cancel
+            Cancelar
           </Button>
           <Button onClick={handleSave} disabled={saving || days.length === 0}>
             {saving && <Loader2 className="w-4 h-4 animate-spin" />}
-            Apply Schedule
+            Aplicar Horario
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -140,7 +140,7 @@ export function DevicesTable() {
     return (
       <div className="flex flex-col items-center justify-center h-48 gap-3">
         <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
-        <p className="text-sm text-muted-foreground">Scanning network…</p>
+        <p className="text-sm text-muted-foreground">Analizando red…</p>
       </div>
     );
   }
@@ -150,7 +150,7 @@ export function DevicesTable() {
       <div className="flex flex-col items-center justify-center h-48 gap-3">
         <p className="text-sm text-destructive">{error}</p>
         <Button variant="outline" size="sm" onClick={refresh} className="border-border gap-2">
-          <RefreshCw className="w-3.5 h-3.5" /> Retry
+          <RefreshCw className="w-3.5 h-3.5" /> Reintentar
         </Button>
       </div>
     );
@@ -163,7 +163,7 @@ export function DevicesTable() {
         <div className="relative flex-1 max-w-xs">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
           <Input
-            placeholder="Search hostname, IP, MAC…"
+            placeholder="Buscar hostname, IP, MAC…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9 bg-input border-border text-sm h-9"
@@ -176,7 +176,7 @@ export function DevicesTable() {
           className="border-border gap-2 h-9"
         >
           <RefreshCw className="w-3.5 h-3.5" />
-          Refresh
+          Actualizar
         </Button>
       </div>
 
@@ -187,22 +187,22 @@ export function DevicesTable() {
             <thead>
               <tr className="border-b border-border">
                 <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Device
+                  Dispositivo
                 </th>
                 <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  IP Address
+                  Dirección IP
                 </th>
                 <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  MAC Address
+                  Dirección MAC
                 </th>
                 <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Band
+                  Banda
                 </th>
                 <th className="text-left px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Status
+                  Estado
                 </th>
                 <th className="text-right px-5 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Actions
+                  Acciones
                 </th>
               </tr>
             </thead>
@@ -210,7 +210,7 @@ export function DevicesTable() {
               {filtered.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="text-center py-12 text-muted-foreground text-sm">
-                    {search ? "No devices match your search" : "No devices found"}
+                    {search ? "Sin resultados para la búsqueda" : "No se encontraron dispositivos"}
                   </td>
                 </tr>
               ) : (
@@ -272,7 +272,7 @@ export function DevicesTable() {
                           ) : (
                             <Ban className="w-3.5 h-3.5" />
                           )}
-                          {device.blocked ? "Unblock" : "Block"}
+                          {device.blocked ? "Desbloquear" : "Bloquear"}
                         </Button>
                         <Button
                           variant="ghost"
@@ -281,7 +281,7 @@ export function DevicesTable() {
                           onClick={() => setSchedulingDevice(device)}
                         >
                           <Clock className="w-3.5 h-3.5" />
-                          Schedule
+                          Horario
                         </Button>
                       </div>
                     </td>
@@ -296,8 +296,8 @@ export function DevicesTable() {
         {filtered.length > 0 && (
           <div className="px-5 py-2.5 border-t border-border/50">
             <p className="text-xs text-muted-foreground">
-              {filtered.length} device{filtered.length !== 1 ? "s" : ""}
-              {search && ` matching "${search}"`}
+              {filtered.length} dispositivo{filtered.length !== 1 ? "s" : ""}
+              {search && ` que coinciden con "${search}"`}
             </p>
           </div>
         )}

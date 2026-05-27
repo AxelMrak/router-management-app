@@ -19,9 +19,9 @@ import { Loader2, Save, Wifi, WifiOff } from "lucide-react";
 
 const schema = z.object({
   enabled: z.boolean(),
-  ssid_24: z.string().min(1, "Required").max(32, "Max 32 chars"),
-  ssid_5: z.string().min(1, "Required").max(32, "Max 32 chars"),
-  password: z.string().min(8, "Min 8 chars").max(64, "Max 64 chars"),
+  ssid_24: z.string().min(1, "Requerido").max(32, "Máx. 32 caracteres"),
+  ssid_5: z.string().min(1, "Requerido").max(32, "Máx. 32 caracteres"),
+  password: z.string().min(8, "Mín. 8 caracteres").max(64, "Máx. 64 caracteres"),
   encryption: z.enum(["none", "wpa2", "wpa3", "wpa2/wpa3"]),
 });
 
@@ -30,8 +30,8 @@ type FormValues = z.infer<typeof schema>;
 const ENCRYPTION_OPTIONS = [
   { value: "wpa2", label: "WPA2-PSK" },
   { value: "wpa3", label: "WPA3-SAE" },
-  { value: "wpa2/wpa3", label: "WPA2/WPA3 Mixed" },
-  { value: "none", label: "Open (no password)" },
+  { value: "wpa2/wpa3", label: "WPA2/WPA3 Mixto" },
+  { value: "none", label: "Abierta (sin contraseña)" },
 ];
 
 function FormField({
@@ -106,9 +106,9 @@ export function GuestWifiForm() {
                 )}
               </div>
               <div>
-                <p className="text-sm font-medium text-foreground">Guest Network</p>
+                <p className="text-sm font-medium text-foreground">Red de Invitados</p>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {enabled ? "Broadcasting on 2.4GHz and 5GHz" : "Network is disabled"}
+                  {enabled ? "Transmitiendo en 2.4 GHz y 5 GHz" : "Red desactivada"}
                 </p>
               </div>
             </div>
@@ -129,9 +129,9 @@ export function GuestWifiForm() {
         <div className="bg-card border border-border rounded-xl p-5 flex flex-col gap-4">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-2 h-2 rounded-full bg-primary" />
-            <p className="text-sm font-medium text-foreground">2.4 GHz Band</p>
+            <p className="text-sm font-medium text-foreground">Banda de 2.4 GHz</p>
           </div>
-          <FormField label="Network Name (SSID)" error={errors.ssid_24?.message}>
+          <FormField label="Nombre de Red (SSID)" error={errors.ssid_24?.message}>
             <Input
               placeholder="MyGuest_2G"
               className="bg-input border-border font-mono text-sm"
@@ -144,9 +144,9 @@ export function GuestWifiForm() {
         <div className="bg-card border border-border rounded-xl p-5 flex flex-col gap-4">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-2 h-2 rounded-full bg-[oklch(0.75_0.18_65)]" />
-            <p className="text-sm font-medium text-foreground">5 GHz Band</p>
+            <p className="text-sm font-medium text-foreground">Banda de 5 GHz</p>
           </div>
-          <FormField label="Network Name (SSID)" error={errors.ssid_5?.message}>
+          <FormField label="Nombre de Red (SSID)" error={errors.ssid_5?.message}>
             <Input
               placeholder="MyGuest_5G"
               className="bg-input border-border font-mono text-sm"
@@ -157,9 +157,9 @@ export function GuestWifiForm() {
 
         {/* Security */}
         <div className="lg:col-span-2 bg-card border border-border rounded-xl p-5 flex flex-col gap-4">
-          <p className="text-sm font-medium text-foreground">Security</p>
+          <p className="text-sm font-medium text-foreground">Seguridad</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FormField label="Encryption" error={undefined}>
+            <FormField label="Cifrado" error={undefined}>
               <Controller
                 name="encryption"
                 control={control}
@@ -180,7 +180,7 @@ export function GuestWifiForm() {
               />
             </FormField>
 
-            <FormField label="Password" error={errors.password?.message}>
+            <FormField label="Contraseña" error={errors.password?.message}>
               <Input
                 type="password"
                 placeholder="••••••••"
@@ -200,7 +200,7 @@ export function GuestWifiForm() {
           ) : (
             <Save className="w-4 h-4" />
           )}
-          {isSaving ? "Saving…" : "Save Changes"}
+          {isSaving ? "Guardando…" : "Guardar Cambios"}
         </Button>
       </div>
     </form>

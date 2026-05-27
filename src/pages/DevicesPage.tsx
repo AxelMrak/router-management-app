@@ -4,8 +4,8 @@ import { DevicesTable } from "@/features/devices/DevicesTable";
 export default function DevicesPage() {
   return (
     <DashboardLayout
-      title="Devices"
-      description="Manage connected devices and schedules"
+      title="Dispositivos"
+      description="Gestiona dispositivos conectados y horarios"
     >
       <DevicesTable />
     </DashboardLayout>

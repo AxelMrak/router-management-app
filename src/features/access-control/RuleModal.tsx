@@ -27,10 +27,10 @@ import { Loader2 } from "lucide-react";
 const weekdayEnum = z.enum(["mon", "tue", "wed", "thu", "fri", "sat", "sun"]);
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().min(1, "El nombre es obligatorio"),
   enabled: z.boolean(),
   type: z.enum(["url", "ip", "port", "mac"]),
-  value: z.string().min(1, "Value is required"),
+  value: z.string().min(1, "El valor es obligatorio"),
   protocol: z.enum(["tcp", "udp", "both"]).optional(),
   days: z.array(weekdayEnum),
   timeStart: z.string().optional(),
@@ -40,10 +40,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const TYPE_OPTIONS = [
-  { value: "url", label: "URL / Domain" },
-  { value: "ip", label: "IP Address" },
-  { value: "port", label: "Port" },
-  { value: "mac", label: "MAC Address" },
+  { value: "url", label: "URL / Dominio" },
+  { value: "ip", label: "Dirección IP" },
+  { value: "port", label: "Puerto" },
+  { value: "mac", label: "Dirección MAC" },
 ];
 
 const PROTOCOL_OPTIONS = [
@@ -126,7 +126,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
       <DialogContent className="bg-card border-border max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-foreground">
-            {rule ? "Edit Rule" : "New Rule"}
+            {rule ? "Editar Regla" : "Nueva Regla"}
           </DialogTitle>
         </DialogHeader>
 
@@ -134,9 +134,9 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
           {/* Name + enabled */}
           <div className="flex items-end gap-3">
             <div className="flex flex-col gap-1.5 flex-1">
-              <Label className="text-sm text-foreground/80">Rule Name</Label>
+              <Label className="text-sm text-foreground/80">Nombre de la Regla</Label>
               <Input
-                placeholder="Block social media"
+                placeholder="Bloquear redes sociales"
                 className="bg-input border-border"
                 {...register("name")}
               />
@@ -145,7 +145,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
               )}
             </div>
             <div className="flex flex-col items-center gap-1.5 pb-0.5">
-              <Label className="text-xs text-muted-foreground">Enabled</Label>
+              <Label className="text-xs text-muted-foreground">Activado</Label>
               <Controller
                 name="enabled"
                 control={control}
@@ -159,7 +159,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
           {/* Type + Value */}
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1.5">
-              <Label className="text-sm text-foreground/80">Block Type</Label>
+              <Label className="text-sm text-foreground/80">Tipo de Bloqueo</Label>
               <Controller
                 name="type"
                 control={control}
@@ -181,7 +181,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label className="text-sm text-foreground/80">Value</Label>
+              <Label className="text-sm text-foreground/80">Valor</Label>
               <Input
                 placeholder={VALUE_PLACEHOLDERS[ruleType] ?? ""}
                 className="bg-input border-border font-mono text-sm"
@@ -196,7 +196,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
           {/* Protocol (only for port type) */}
           {ruleType === "port" && (
             <div className="flex flex-col gap-1.5">
-              <Label className="text-sm text-foreground/80">Protocol</Label>
+              <Label className="text-sm text-foreground/80">Protocolo</Label>
               <Controller
                 name="protocol"
                 control={control}
@@ -221,10 +221,10 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
           {/* Schedule */}
           <div className="flex flex-col gap-3 bg-muted/30 rounded-lg p-4 border border-border/50">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-              Schedule
+              Programación
             </p>
             <div className="flex flex-col gap-2">
-              <Label className="text-xs text-muted-foreground">Active Days</Label>
+              <Label className="text-xs text-muted-foreground">Días Activos</Label>
               <Controller
                 name="days"
                 control={control}
@@ -239,7 +239,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
 
             <div className="flex items-center gap-3">
               <div className="flex flex-col gap-1 flex-1">
-                <label className="text-xs text-muted-foreground">From</label>
+                <label className="text-xs text-muted-foreground">Desde</label>
                 <Input
                   type="time"
                   className="bg-input border-border font-mono text-sm"
@@ -248,7 +248,7 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
               </div>
               <div className="mt-4 text-muted-foreground">—</div>
               <div className="flex flex-col gap-1 flex-1">
-                <label className="text-xs text-muted-foreground">To</label>
+                <label className="text-xs text-muted-foreground">Hasta</label>
                 <Input
                   type="time"
                   className="bg-input border-border font-mono text-sm"
@@ -265,11 +265,11 @@ export function RuleModal({ rule, onSave, onClose, isSaving }: RuleModalProps) {
               onClick={onClose}
               className="border-border"
             >
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" disabled={isSaving} className="min-w-24">
               {isSaving && <Loader2 className="w-4 h-4 animate-spin" />}
-              {rule ? "Save Changes" : "Create Rule"}
+              {rule ? "Guardar Cambios" : "Crear Regla"}
             </Button>
           </DialogFooter>
         </form>

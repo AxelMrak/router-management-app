@@ -11,8 +11,8 @@ import { toast } from "sonner";
 import { Wifi, Loader2, Router } from "lucide-react";
 
 const schema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(1, "Password is required"),
+  username: z.string().min(1, "Usuario requerido"),
+  password: z.string().min(1, "Contraseña requerida"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -32,9 +32,9 @@ export function LoginForm() {
     try {
       const token = await login(values.username, values.password);
       setToken(token);
-      toast.success("Connected to router");
+      toast.success("Conectado al router");
     } catch {
-      toast.error("Login failed — check credentials or router IP");
+      toast.error("Error de inicio de sesión — verifique credenciales o IP del router");
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +50,7 @@ export function LoginForm() {
           </div>
           <div className="text-center">
             <h1 className="text-xl font-semibold text-foreground tracking-tight">RouterAdmin</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">Network Management Console</p>
+            <p className="text-sm text-muted-foreground mt-0.5">Panel de Administración de Red</p>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export function LoginForm() {
         <div className="bg-card border border-border rounded-xl p-6 shadow-lg shadow-black/20">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="username" className="text-sm text-foreground/80">Username</Label>
+              <Label htmlFor="username" className="text-sm text-foreground/80">Usuario</Label>
               <Input
                 id="username"
                 autoComplete="username"
@@ -72,7 +72,7 @@ export function LoginForm() {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="password" className="text-sm text-foreground/80">Password</Label>
+              <Label htmlFor="password" className="text-sm text-foreground/80">Contraseña</Label>
               <Input
                 id="password"
                 type="password"
@@ -96,15 +96,15 @@ export function LoginForm() {
               ) : (
                 <Wifi className="w-4 h-4" />
               )}
-              {isLoading ? "Connecting…" : "Connect"}
+              {isLoading ? "Conectando…" : "Conectar"}
             </Button>
           </form>
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-4">
-          Connects to{" "}
+          Conecta a{" "}
           <code className="font-mono text-primary/80">
-            {import.meta.env.VITE_ROUTER_URL ?? "http://192.168.1.1"}
+            {import.meta.env.VITE_ROUTER_URL ?? "http://192.168.0.1"}
           </code>
         </p>
       </div>

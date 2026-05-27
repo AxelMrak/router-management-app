@@ -4,8 +4,8 @@ import { GuestWifiForm } from "@/features/guest-wifi/GuestWifiForm";
 export default function GuestWifiPage() {
   return (
     <DashboardLayout
-      title="Guest Wi-Fi"
-      description="Configure the isolated guest network"
+      title="WiFi Invitados"
+      description="Configura la red aislada para invitados"
     >
       <GuestWifiForm />
     </DashboardLayout>
